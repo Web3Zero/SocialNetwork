@@ -28,8 +28,8 @@ const thoughtController = {
       });
   },
 
- // create thought to a user
- createThought({ body }, res) {
+  // create thought to a user
+  createThought({ body }, res) {
     console.log(body);
     Thought.create(body)
       .then((thoughtData) => {
@@ -57,7 +57,7 @@ const thoughtController = {
           res.status(404).json({ message: "No thought found" });
           return;
         }
-        res.json(dbThoughtData);  // Return the data in JSON
+        res.json(dbThoughtData); // Return the data in JSON
       })
       .catch((err) => res.status(400).json(err));
   },
@@ -70,10 +70,38 @@ const thoughtController = {
           res.status(404).json({ message: "No thought found" });
           return;
         }
-        res.json(dbThoughtData);  // Return the data in JSON
-      }) 
+        res.json(dbThoughtData); // Return the data in JSON
+      })
       .catch((err) => res.status(400).json(err));
   },
 
+  // add Reaction
+  addReaction({ params, body }, res) {
+    Thought.findOneAndUpdate(
+      { _id: params.thoughtId },
+      { $addToSet: { reactions: body } },
+      { new: true }
+    )
+      .then((dbThoughtData) => {
+        if (!dbThoughtData) {
+          res.status(404).json({ message: "No thought found" });
+          return;
+        }
+        res.json(dbThoughtData); // Return the data in JSON
+      })
+      .catch((err) => res.json(err));
+  },
 
-  module.exports = thoughtController;
+  //delete Reaction
+  deleteReaction({ params }, res) {
+    Thought.findOneAndUpdate(
+      { _id: params.thoughtId }, // Set the id of the thought that is getting deleted
+      { $pull: { reactions: { reactionId: params.reactionId } } }, // remove the associated reactions
+      { new: true }
+    )
+      .then((dbThoughtData) => res.json(dbThoughtData))
+      .catch((err) => res.json(err));
+  },
+};
+
+module.exports = thoughtController;
