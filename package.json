@@ -10,15 +10,15 @@
     },
     "repository": {
       "type": "git",
-      "url": "git+https://github.com/dgourley84/SocialNetwork"
+      "url": "git+https://github.com/Web3Zero/SocialNetwork"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "bugs": {
-      "url": "https://github.com/dgourley84/SocialNetwork/issues"
+      "url": "https://github.com/Web3Zero/SocialNetwork/issues"
     },
-    "homepage": "https://github.com/dgourley84/SocialNetwork",
+    "homepage": "https://github.com/Web3Zero/SocialNetwork",
     "dependencies": {
       "express": "^4.17.1",
       "mongoose": "^6.0.13"
