@@ -1,6 +1,6 @@
 # SocialNetwork
 
-Module 18 Social Network
+Social Network
 
 # ABOUT
 
